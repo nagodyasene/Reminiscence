@@ -6,56 +6,69 @@
 //
 
 import SwiftUI
-import SwiftData
+import MapKit
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    var friends: Location = {
+        var location = Location(type: .Bar, coordinates: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+        location.setName(to: "Friends")
+        location.setDescription(to: "I miss Artem")
+        return location
+    }()
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+        Map {
+            Marker("\(friends.getName())", coordinate: friends.getCoordinates())
         }
     }
+}
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
+struct Location {
+    enum TypeOfPlace {
+        case TouristAttraction, Cafe, Bar, Restaurant, Residence, PlaceOfWork, Default
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+    private let type: Location.TypeOfPlace
+    private let coordinates: CLLocationCoordinate2D
+    private var name: String?
+    private var description: String?
+
+    init(type: Location.TypeOfPlace, coordinates: CLLocationCoordinate2D) {
+        self.type = type
+        self.coordinates = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+    }
+
+    public func getCoordinates() -> CLLocationCoordinate2D {
+        return coordinates
+    }
+
+    public mutating func setName(to newName: String) {
+        name = newName
+    }
+
+    public func getName() -> String {
+        guard let nameValue = name else {
+            return "No name found."
         }
+        return nameValue
+    }
+
+    func getType() -> Location.TypeOfPlace {
+        return self.type
+    }
+
+    mutating func setDescription(to newDescription: String) {
+        description = newDescription
+    }
+
+    func getDescription() -> String {
+        guard let descriptionValue = description else {
+            return "No description found."
+        }
+        return descriptionValue
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
