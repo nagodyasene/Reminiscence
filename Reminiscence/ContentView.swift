@@ -12,13 +12,82 @@ struct ContentView: View {
     var friends: Location = {
         var location = Location(type: .Bar, coordinates: CLLocationCoordinate2D(latitude: 0, longitude: 0))
         location.setName(to: "Friends")
-        location.setDescription(to: "I miss Artem")
         return location
     }()
 
     var body: some View {
+        ZStack {
+            TabView {
+                Tab("Map", systemImage: "map") {
+                    MapView()
+                }
+                Tab("Account", systemImage: "person.crop.circle") {
+                    AccountView()
+                }
+            }
+        }
+    }
+}
+
+struct MapView : View {
+    var body: some View {
         Map {
-            Marker("\(friends.getName())", coordinate: friends.getCoordinates())
+            
+        }
+    }
+}
+
+struct CardView: View {
+    let title: String
+    let value: Int
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(.title)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Spacer(minLength: 8)
+
+            Text("\(value)")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .aspectRatio(1, contentMode: .fit)
+        .background(Color(.systemGray5), in: .rect(cornerRadius: 24))
+    }
+}
+
+struct AccountView: View {
+    var photosTaken: Int = 1
+    var body: some View {
+        ScrollView {
+            HStack(spacing: 15) {
+                Image("ProfilePicture")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.circle)
+                
+                VStack(alignment: .leading) {
+                    Text("Enes Aydoğan")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                    Text("Studying in Liberec")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Grid {
+                GridRow {
+                    CardView(title: "Photos taken", value: 1)
+                    CardView(title: "Places seen", value: 1)
+                }
+            }
+            .padding()
         }
     }
 }
@@ -70,5 +139,5 @@ struct Location {
 }
 
 #Preview {
-    ContentView()
+    AccountView()
 }
