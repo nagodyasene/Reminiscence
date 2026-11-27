@@ -32,26 +32,16 @@
       "kind": "group",
       "name": "Products",
       "children": [
-<<<<<<< HEAD
         { "path": "<PRODUCTS>/Reminiscence.app", "id": "375B443330B5E55200CE9710", "type": "wrapper.application", "index": false },
         { "path": "<PRODUCTS>/ReminiscenceTests.xctest", "id": "375B444430B5E55400CE9710", "type": "wrapper.cfbundle", "index": false },
         { "path": "<PRODUCTS>/ReminiscenceUITests.xctest", "id": "375B444E30B5E55400CE9710", "type": "wrapper.cfbundle", "index": false },
-=======
-        { "path": "<PRODUCTS>/Reminiscence.app", "id": "373121C930B5C6CC00BF01AD", "type": "wrapper.application", "index": false },
-        { "path": "<PRODUCTS>/ReminiscenceTests.xctest", "id": "373121DA30B5C6CE00BF01AD", "type": "wrapper.cfbundle", "index": false },
-        { "path": "<PRODUCTS>/ReminiscenceUITests.xctest", "id": "373121E430B5C6CE00BF01AD", "type": "wrapper.cfbundle", "index": false },
->>>>>>> 956fc2907b78c5dc98d70d6841abf9e452759389
       ],
     },
   ],
   "targets": [
     {
       "name": "Reminiscence",
-<<<<<<< HEAD
       "id": "375B443230B5E55200CE9710",
-=======
-      "id": "373121C830B5C6CC00BF01AD",
->>>>>>> 956fc2907b78c5dc98d70d6841abf9e452759389
       "product": "Products/Reminiscence.app",
       "product-type": "application",
       "build-phases": [
@@ -91,11 +81,7 @@
       },
     }, {
       "name": "ReminiscenceTests",
-<<<<<<< HEAD
       "id": "375B444330B5E55400CE9710",
-=======
-      "id": "373121D930B5C6CE00BF01AD",
->>>>>>> 956fc2907b78c5dc98d70d6841abf9e452759389
       "product": "Products/ReminiscenceTests.xctest",
       "product-type": "bundle.unit-test",
       "test-host-target": "Reminiscence",
@@ -127,11 +113,7 @@
       },
     }, {
       "name": "ReminiscenceUITests",
-<<<<<<< HEAD
       "id": "375B444D30B5E55400CE9710",
-=======
-      "id": "373121E330B5C6CE00BF01AD",
->>>>>>> 956fc2907b78c5dc98d70d6841abf9e452759389
       "product": "Products/ReminiscenceUITests.xctest",
       "product-type": "bundle.ui-testing",
       "test-host-target": "Reminiscence",
